@@ -7,6 +7,8 @@ import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -27,8 +29,12 @@ import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
-public class MainActivity extends Activity implements Umgebung.OnFragmentInteractionListener, Neuigkeiten.OnFragmentInteractionListener,
-Meldungen.OnFragmentInteractionListener, NeueMeldung.OnFragmentInteractionListener, Einstellungen.OnFragmentInteractionListener{
+public class MainActivity extends AppCompatActivity
+        implements Umgebung.OnFragmentInteractionListener,
+        Neuigkeiten.OnFragmentInteractionListener,
+        Meldungen.OnFragmentInteractionListener,
+        NeueMeldung.OnFragmentInteractionListener,
+        Einstellungen.OnFragmentInteractionListener{
 
 
     Drawer result;
@@ -71,6 +77,7 @@ Meldungen.OnFragmentInteractionListener, NeueMeldung.OnFragmentInteractionListen
         Drawable headerBack = getResources().getDrawable(R.drawable.header_back);
 
 
+        // WIKI: https://github.com/mikepenz/MaterialDrawer/wiki/.MaterialDrawer-Wiki
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
                 .addProfiles(
@@ -93,11 +100,13 @@ Meldungen.OnFragmentInteractionListener, NeueMeldung.OnFragmentInteractionListen
         itemUmgebung.withIcon(dMap);
         itemEinstellungen.withIcon(dWrench);
 
+        // WIKI: https://github.com/mikepenz/MaterialDrawer/wiki/.MaterialDrawer-Wiki
         result = new DrawerBuilder()
                 .withActivity(this)
                 .withAccountHeader(headerResult)
-                .withTranslucentStatusBar(false)
-                .withActionBarDrawerToggle(false)
+                .withTranslucentStatusBar(false) //ActionBar bleibt immer fix und sichtbar
+                .withActionBarDrawerToggle(true) // ??
+                .withActionBarDrawerToggleAnimated(true)
                 .addDrawerItems(
                         itemUmgebung,
                         itemNeuigkeiten,
