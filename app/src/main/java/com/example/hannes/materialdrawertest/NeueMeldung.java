@@ -4,9 +4,12 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 
 /**
@@ -64,7 +67,37 @@ public class NeueMeldung extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_neue_meldung, container, false);
+        View v =  inflater.inflate(R.layout.fragment_neue_meldung, container, false);
+        ImageButton ib = (ImageButton)v.getRootView().findViewById(R.id.btnGPS);
+        FloatingActionButton fab = (FloatingActionButton)v.getRootView().findViewById(R.id.fab);
+        if(ib == null || fab == null)
+            Toast.makeText(getContext(), "NULL", Toast.LENGTH_SHORT);
+        else {
+            ib.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    buttonGPSClicked(v);
+                }
+            });
+
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    buttonSpeichernClicked(v);
+                }
+
+
+            });
+        }
+        return v;
+    }
+
+    private void buttonGPSClicked(View v) {
+        Toast.makeText(getActivity(), "GHPS", Toast.LENGTH_SHORT).show();
+    }
+
+    private void buttonSpeichernClicked(View v) {
+        Toast.makeText(getActivity(), "Speichern", Toast.LENGTH_SHORT).show();
     }
 
     // TODO: Rename method, update argument and hook method into UI event
